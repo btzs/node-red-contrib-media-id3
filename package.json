@@ -1,0 +1,32 @@
+{
+  "name": "node-red-contrib-media-id3",
+  "version": "1.1.0",
+  "description": "Node-RED node to edit ID3.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "node-red": {
+    "nodes": {
+      "id3": "red/id3.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btzs/node-red-contrib-media-id3.git"
+  },
+  "keywords": [
+    "zip",
+    "node-red",
+    "unzip"
+  ],
+  "author": "Benjamin Tzschoppe <btzs@btzs.eu>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/btzs/node-red-contrib-media-id3/issues"
+  },
+  "homepage": "https://github.com/btzs/node-red-contrib-media-id3#readme",
+  "dependencies": {
+    "jszip": "^3.5.0",
+    "node-id3": "^0.2.3"
+  }
+}
