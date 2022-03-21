@@ -13,46 +13,46 @@
   limitations under the License.
 -->
 
-<script type="text/x-red" data-template-name="zip">
+<script type="text/x-red" data-template-name="id3">
 	<div class="form-row">
-		<label for="node-input-mode"><i class="fa fa-sliders"></i> <span data-i18n="zip.label.mode"></span></label>
+		<label for="node-input-mode"><i class="fa fa-sliders"></i> <span data-i18n="id3label.mode"></span></label>
 		<select type="text" id="node-input-mode">
-			<option value="compress" data-i18n="zip.mode.compress"></option>
-			<option value="decompress" data-i18n="zip.mode.decompress"></option>
-			<option value="extract" data-i18n="zip.mode.extract"></option>
+			<option value="compress" data-i18n="id3mode.compress"></option>
+			<option value="decompress" data-i18n="id3mode.decompress"></option>
+			<option value="extract" data-i18n="id3mode.extract"></option>
 		</select>
 	</div>
-    <div class="form-row" id="node-form-row-zip-filename" style="display: none">
-        <label for="node-input-filename"><i class="fa fa-file"></i> <span data-i18n="zip.label.filename"></span></label>
-        <input type="text" id="node-input-filename" data-i18n="[placeholder]zip.label.filename">
+    <div class="form-row" id="node-form-row-id3-filename" style="display: none">
+        <label for="node-input-filename"><i class="fa fa-file"></i> <span data-i18n="id3label.filename"></span></label>
+        <input type="text" id="node-input-filename" data-i18n="[placeholder]id3label.filename">
     </div>
-    <div class="form-row" id="node-form-row-zip-compressionLevel" style="display: none">
-        <label for="node-input-compressionlevel"><i class="fa fa-compress"></i> <span data-i18n="zip.label.compressionlevel"></span></label>
+    <div class="form-row" id="node-form-row-id3-compressionLevel" style="display: none">
+        <label for="node-input-compressionlevel"><i class="fa fa-compress"></i> <span data-i18n="id3label.compressionlevel"></span></label>
         <select type="text" id="node-input-compressionlevel">
-            <option value="0" data-i18n="zip.label.level.no"></option>
-            <option value="1" data-i18n="zip.label.level.fast"></option>
+            <option value="0" data-i18n="id3label.level.no"></option>
+            <option value="1" data-i18n="id3label.level.fast"></option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
-            <option value="6" data-i18n="zip.label.level.default"></option>
+            <option value="6" data-i18n="id3label.level.default"></option>
             <option value="7">7</option>
             <option value="8">8</option>
-            <option value="9" data-i18n="zip.label.level.best"></option>
+            <option value="9" data-i18n="id3label.level.best"></option>
         </select>
     </div>
-	<div class="form-row" id="node-form-row-zip-outasstring" style="display: none">
+	<div class="form-row" id="node-form-row-id3-outasstring" style="display: none">
 		<label>&nbsp;</label>
 		<input type="checkbox" id="node-input-outasstring" style="display: inline-block; width: auto; vertical-align: top;">
-		<label for="node-input-outasstring" style="width:70%;"><span data-i18n="zip.label.outasstring"></span></label>
+		<label for="node-input-outasstring" style="width:70%;"><span data-i18n="id3label.outasstring"></span></label>
 	</div>
     <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="zip.label.name"></span></label>
-        <input type="text" id="node-input-name" data-i18n="[placeholder]zip.label.name">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="id3label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]id3label.name">
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="zip">
+<script type="text/x-red" data-help-name="id3">
     <p>Reads and creates ZIP files</p>
 
     <h3>Inputs</h3>
@@ -136,17 +136,17 @@
         },
         inputs:1,
         outputs:1,
-        icon: "zip.png",
+        icon: "id3png",
         label: function() {
-            return this.name||this._('zip.mode.' + this.mode).toLowerCase();
+            return this.name||this._('id3mode.' + this.mode).toLowerCase();
         },
         labelStyle: function() {
             return this.name?"node_label_italic":"";
         },
         oneditprepare: function() {
-            var filenameRow = $('#node-form-row-zip-filename');
-            var compressionRow = $('#node-form-row-zip-compressionLevel');
-            var outasstringRow = $('#node-form-row-zip-outasstring');
+            var filenameRow = $('#node-form-row-id3-filename');
+            var compressionRow = $('#node-form-row-id3-compressionLevel');
+            var outasstringRow = $('#node-form-row-id3-outasstring');
             var modeInput = $('#node-input-mode');
 
             if (this.compressionlevel === undefined) {
