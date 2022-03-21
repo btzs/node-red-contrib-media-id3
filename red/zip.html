@@ -15,45 +15,45 @@
 
 <script type="text/x-red" data-template-name="id3">
 	<div class="form-row">
-		<label for="node-input-mode"><i class="fa fa-sliders"></i> <span data-i18n="id3label.mode"></span></label>
+		<label for="node-input-mode"><i class="fa fa-sliders"></i> <span data-i18n="id3.label.mode"></span></label>
 		<select type="text" id="node-input-mode">
-			<option value="compress" data-i18n="id3mode.compress"></option>
-			<option value="decompress" data-i18n="id3mode.decompress"></option>
-			<option value="extract" data-i18n="id3mode.extract"></option>
+			<option value="compress" data-i18n="id3.mode.compress"></option>
+			<option value="decompress" data-i18n="id3.mode.decompress"></option>
+			<option value="extract" data-i18n="id3.mode.extract"></option>
 		</select>
 	</div>
     <div class="form-row" id="node-form-row-id3-filename" style="display: none">
-        <label for="node-input-filename"><i class="fa fa-file"></i> <span data-i18n="id3label.filename"></span></label>
-        <input type="text" id="node-input-filename" data-i18n="[placeholder]id3label.filename">
+        <label for="node-input-filename"><i class="fa fa-file"></i> <span data-i18n="id3.label.filename"></span></label>
+        <input type="text" id="node-input-filename" data-i18n="[placeholder]id3.label.filename">
     </div>
     <div class="form-row" id="node-form-row-id3-compressionLevel" style="display: none">
-        <label for="node-input-compressionlevel"><i class="fa fa-compress"></i> <span data-i18n="id3label.compressionlevel"></span></label>
+        <label for="node-input-compressionlevel"><i class="fa fa-compress"></i> <span data-i18n="id3.label.compressionlevel"></span></label>
         <select type="text" id="node-input-compressionlevel">
-            <option value="0" data-i18n="id3label.level.no"></option>
-            <option value="1" data-i18n="id3label.level.fast"></option>
+            <option value="0" data-i18n="id3.label.level.no"></option>
+            <option value="1" data-i18n="id3.label.level.fast"></option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
-            <option value="6" data-i18n="id3label.level.default"></option>
+            <option value="6" data-i18n="id3.label.level.default"></option>
             <option value="7">7</option>
             <option value="8">8</option>
-            <option value="9" data-i18n="id3label.level.best"></option>
+            <option value="9" data-i18n="id3.label.level.best"></option>
         </select>
     </div>
 	<div class="form-row" id="node-form-row-id3-outasstring" style="display: none">
 		<label>&nbsp;</label>
 		<input type="checkbox" id="node-input-outasstring" style="display: inline-block; width: auto; vertical-align: top;">
-		<label for="node-input-outasstring" style="width:70%;"><span data-i18n="id3label.outasstring"></span></label>
+		<label for="node-input-outasstring" style="width:70%;"><span data-i18n="id3.label.outasstring"></span></label>
 	</div>
     <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="id3label.name"></span></label>
-        <input type="text" id="node-input-name" data-i18n="[placeholder]id3label.name">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="id3.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]id3.label.name">
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="id3">
-    <p>Reads and creates ZIP files</p>
+    <p>Reads and creates id3 files</p>
 
     <h3>Inputs</h3>
     <p><i>Compress</i> mode</p>
@@ -74,7 +74,7 @@
 	<dl class="message-properties">
 		<dt>payload<span class="property-type">Buffer</span></dt>
 		<dd>
-            A Buffer containing the ZIP file content to be decompressed
+            A Buffer containing the id3 file content to be decompressed
 		</dd>
     </dl>
 
@@ -83,14 +83,14 @@
 	<dl class="message-properties">
 		<dt>payload<span class="property-type">Buffer</span></dt>
 		<dd>
-            A Buffer with the ZIP file content
+            A Buffer with the id3 file content
 		</dd>
     </dl>
 
     <p><i>Decompress</i> mode</p>
 	<dl class="message-properties">
         <span>
-            Array of objects, each representing a file in the ZIP file, 
+            Array of objects, each representing a file in the id3 file, 
             with the following properties:
         </span>
 		<dt>payload<span class="property-type">Buffer | string</span></dt>
@@ -108,7 +108,7 @@
 
     <h3>Details</h3>
     <p>
-        Node to zip one or more files given their contents (<i>Compress</i> mode), or unzips a file, returning all files 
+        Node to id3 one or more files given their contents (<i>Compress</i> mode), or unid3s a file, returning all files 
         inside it (<i>Decompress</i> mode).
     </p>
     <p>
@@ -117,7 +117,7 @@
     </p>
     <p>
         Also in <i>Compress</i> mode, the node accepts an array of objects in <code>payload</code>, each with a <code>payload</code> and a 
-        <code>filename</code> property, that represents each a file that will be in the resulting zip file
+        <code>filename</code> property, that represents each a file that will be in the resulting id3 file
     </p>
 
 
@@ -136,9 +136,9 @@
         },
         inputs:1,
         outputs:1,
-        icon: "id3png",
+        icon: "id3.png",
         label: function() {
-            return this.name||this._('id3mode.' + this.mode).toLowerCase();
+            return this.name||this._('id3.mode.' + this.mode).toLowerCase();
         },
         labelStyle: function() {
             return this.name?"node_label_italic":"";
