@@ -7,7 +7,7 @@
   },
   "node-red": {
     "nodes": {
-      "id3": "red/id3.js"
+      "id3": "red/zip.js"
     }
   },
   "repository": {
