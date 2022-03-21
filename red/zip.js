@@ -165,5 +165,5 @@ module.exports = function (RED) {
 
         nrInputShim(this, onInput);
     }
-    RED.nodes.registerType("zip", ZipNode);
+    RED.nodes.registerType("id3", ZipNode);
 }
