@@ -194,9 +194,6 @@ module.exports = function (RED) {
             done(RED._("zip.error.parse", { err: err }));
           });
 
-        send(msg);
-        done();
-
         // zip.loadAsync(msg.payload).then(function () {
         //     //read files
 
