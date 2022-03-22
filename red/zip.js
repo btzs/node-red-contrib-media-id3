@@ -175,7 +175,7 @@ module.exports = function (RED) {
         }
 
         if (!(msg.tags instanceof Object)) {
-          done(RED._("zip.error.payload-type-buffer"));
+          done(RED._("zip.error.payload-type-tags"));
           return;
         }
 
