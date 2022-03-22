@@ -174,12 +174,14 @@ module.exports = function (RED) {
           return;
         }
 
-        if (!(msg.tags instanceof Object)) {
-          done(RED._("zip.error.payload-type-tags"));
+        const tags = msg.tags
+
+        if (!(tags instanceof Object)) {
+          done(RED._("zip.error.type-tags"));
           return;
         }
 
-        const tags = NodeID3Promise.update(msg.tags, msg.payload)
+        NodeID3Promise.update(msg.tags, msg.payload)
           .then(function (data) {
             //send the result
             msg.payload = data;
