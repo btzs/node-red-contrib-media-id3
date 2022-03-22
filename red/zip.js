@@ -176,12 +176,12 @@ module.exports = function (RED) {
 
         const tags = msg.tags
 
-        if (!(tags instanceof Object)) {
+        if (!(tags.constructor.name === "Object")) {
           done(RED._("zip.error.type-tags"));
           return;
         }
 
-        NodeID3Promise.update(msg.tags, msg.payload)
+        NodeID3Promise.update(tags, msg.payload)
           .then(function (data) {
             //send the result
             msg.payload = data;
