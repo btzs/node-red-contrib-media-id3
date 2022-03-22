@@ -15,155 +15,215 @@
  * limitations under the License.
  **/
 
-const util = require('util');
+const util = require("util");
 
 function nrInputShim(node, fn) {
-    node.on('input', function (msg, send, done) {
-        send = send || node.send;
-        done = done || (err => err && node.error(err, msg));
-        fn(msg, send, done);
-    });
+  node.on("input", function (msg, send, done) {
+    send = send || node.send;
+    done = done || ((err) => err && node.error(err, msg));
+    fn(msg, send, done);
+  });
 }
 
 module.exports = function (RED) {
-    const JSZip = require("jszip");
-    const NodeID3 = require('node-id3')
+  const JSZip = require("jszip");
+  const NodeID3 = require("node-id3");
+  const NodeID3Promise = require("node-id3").Promise;
 
-    function ZipNode(config) {
-        RED.nodes.createNode(this, config);
-        const node = this;
+  function ZipNode(config) {
+    RED.nodes.createNode(this, config);
+    const node = this;
 
-        function onInput(msg, send, done) {
-            let zip, f;
+    function onInput(msg, send, done) {
+      let zip, f;
 
-            if (config.mode === "compress") {
-                zip = new JSZip();
+      if (config.mode === "compress") {
+        zip = new JSZip();
 
-                let level = parseInt(config.compressionlevel);
-                if (isNaN(level)) level = 6; //default
+        let level = parseInt(config.compressionlevel);
+        if (isNaN(level)) level = 6; //default
 
-                if (Array.isArray(msg.payload)) {
-                    for (var i in msg.payload) {
-                        f = msg.payload[i];
+        if (Array.isArray(msg.payload)) {
+          for (var i in msg.payload) {
+            f = msg.payload[i];
 
-                        if (typeof f.filename !== 'string') {
-                            done(RED._('zip.error.filename-type-string'));
-                            return;
-                        }
-
-                        if (!(f.payload instanceof Buffer || typeof f.payload == 'string')) {
-                            done(RED._('zip.error.payload-type-buffer-string'));
-                            return;
-                        }
-
-                        zip.file(f.filename, f.payload);
-                    }
-                } else {
-                    if (!(msg.payload instanceof Buffer || typeof msg.payload == 'string')) {
-                        done(RED._('zip.error.payload-type-buffer-string'));
-                        return;
-                    }
-
-                    zip.file(config.filename || msg.filename || 'file', msg.payload);
-                }
-
-                zip.generateAsync({
-                    type: 'nodebuffer',
-                    compression: level ? 'DEFLATE' : 'STORE',
-                    compressionOptions: { level }
-                }).then(function (data) {
-                    //sends message
-
-                    msg.payload = data;
-                    send(msg);
-                    done();
-
-                }).catch(function (err) {
-                    //catches errors
-
-                    done(RED._('zip.error.parse', { err: err }));
-                })
-
-
-            } else if (config.mode === "decompress") {
-
-                if (!(msg.payload instanceof Buffer)) {
-                    done(RED._("zip.error.payload-type-buffer"));
-                    return;
-                }
-
-                zip = new JSZip();
-
-                zip.loadAsync(msg.payload).then(function () {
-                    //read files
-
-                    const promises = [];
-                    zip.forEach(function (path, zFile) {
-                        promises.push(zFile.async(config.outasstring ? 'string' : 'nodebuffer').then(function (content) {
-                            return {
-                                filename: path,
-                                payload: content
-                            };
-                        }));
-                    });
-
-                    return Promise.all(promises);
-                }).then(function (files) {
-                    //send the result
-
-                    msg.payload = files;
-                    send(msg);
-                    done();
-                }).catch(function (err) {
-                    //catches errors
-
-                    done(RED._('zip.error.parse', { err: err }));
-                });
-            } else if (config.mode === "extract") {
-
-                if (!(msg.payload instanceof Buffer)) {
-                    done(RED._("zip.error.payload-type-buffer"));
-                    return;
-                }
-
-                const tags = NodeID3.read(msg.payload)
-
-
-                msg.payload = tags;
-                send(msg);
-                done();
-
-
-                // zip.loadAsync(msg.payload).then(function () {
-                //     //read files
-
-                //     const promises = [];
-                //     zip.forEach(function (path, zFile) {
-                //         promises.push(zFile.async(config.outasstring ? 'string' : 'nodebuffer').then(function (content) {
-                //             return {
-                //                 filename: path,
-                //                 payload: content
-                //             };
-                //         }));
-                //     });
-
-                //     return Promise.all(promises);
-                // }).then(function (files) {
-                //     //send the result
-
-                //     msg.payload = files;
-                //     send(msg);
-                //     done();
-                // }).catch(function (err) {
-                //     //catches errors
-
-                //     done(RED._('zip.error.parse', { err: err }));
-                // });
+            if (typeof f.filename !== "string") {
+              done(RED._("zip.error.filename-type-string"));
+              return;
             }
-            
-        };
 
-        nrInputShim(this, onInput);
+            if (
+              !(f.payload instanceof Buffer || typeof f.payload == "string")
+            ) {
+              done(RED._("zip.error.payload-type-buffer-string"));
+              return;
+            }
+
+            zip.file(f.filename, f.payload);
+          }
+        } else {
+          if (
+            !(msg.payload instanceof Buffer || typeof msg.payload == "string")
+          ) {
+            done(RED._("zip.error.payload-type-buffer-string"));
+            return;
+          }
+
+          zip.file(config.filename || msg.filename || "file", msg.payload);
+        }
+
+        zip
+          .generateAsync({
+            type: "nodebuffer",
+            compression: level ? "DEFLATE" : "STORE",
+            compressionOptions: { level },
+          })
+          .then(function (data) {
+            //sends message
+
+            msg.payload = data;
+            send(msg);
+            done();
+          })
+          .catch(function (err) {
+            //catches errors
+
+            done(RED._("zip.error.parse", { err: err }));
+          });
+      } else if (config.mode === "decompress") {
+        if (!(msg.payload instanceof Buffer)) {
+          done(RED._("zip.error.payload-type-buffer"));
+          return;
+        }
+
+        zip = new JSZip();
+
+        zip
+          .loadAsync(msg.payload)
+          .then(function () {
+            //read files
+
+            const promises = [];
+            zip.forEach(function (path, zFile) {
+              promises.push(
+                zFile
+                  .async(config.outasstring ? "string" : "nodebuffer")
+                  .then(function (content) {
+                    return {
+                      filename: path,
+                      payload: content,
+                    };
+                  })
+              );
+            });
+
+            return Promise.all(promises);
+          })
+          .then(function (files) {
+            //send the result
+
+            msg.payload = files;
+            send(msg);
+            done();
+          })
+          .catch(function (err) {
+            //catches errors
+
+            done(RED._("zip.error.parse", { err: err }));
+          });
+      } else if (config.mode === "extract") {
+        if (!(msg.payload instanceof Buffer)) {
+          done(RED._("zip.error.payload-type-buffer"));
+          return;
+        }
+
+        const tags = NodeID3.read(msg.payload);
+
+        msg.payload = tags;
+        send(msg);
+        done();
+
+        // zip.loadAsync(msg.payload).then(function () {
+        //     //read files
+
+        //     const promises = [];
+        //     zip.forEach(function (path, zFile) {
+        //         promises.push(zFile.async(config.outasstring ? 'string' : 'nodebuffer').then(function (content) {
+        //             return {
+        //                 filename: path,
+        //                 payload: content
+        //             };
+        //         }));
+        //     });
+
+        //     return Promise.all(promises);
+        // }).then(function (files) {
+        //     //send the result
+
+        //     msg.payload = files;
+        //     send(msg);
+        //     done();
+        // }).catch(function (err) {
+        //     //catches errors
+
+        //     done(RED._('zip.error.parse', { err: err }));
+        // });
+      } else if (config.mode === "update") {
+        if (!(msg.payload instanceof Buffer)) {
+          done(RED._("zip.error.payload-type-buffer"));
+          return;
+        }
+
+        if (!(msg.tags instanceof Object)) {
+          done(RED._("zip.error.payload-type-buffer"));
+          return;
+        }
+
+        const tags = NodeID3Promise.update(msg.tags, msg.payload)
+          .then(function (data) {
+            //send the result
+            msg.payload = data;
+            send(msg);
+            done();
+          })
+          .catch((error) => {
+            //catches errors
+
+            done(RED._("zip.error.parse", { err: err }));
+          });
+
+        send(msg);
+        done();
+
+        // zip.loadAsync(msg.payload).then(function () {
+        //     //read files
+
+        //     const promises = [];
+        //     zip.forEach(function (path, zFile) {
+        //         promises.push(zFile.async(config.outasstring ? 'string' : 'nodebuffer').then(function (content) {
+        //             return {
+        //                 filename: path,
+        //                 payload: content
+        //             };
+        //         }));
+        //     });
+
+        //     return Promise.all(promises);
+        // }).then(function (files) {
+        //     //send the result
+
+        //     msg.payload = files;
+        //     send(msg);
+        //     done();
+        // }).catch(function (err) {
+        //     //catches errors
+
+        //     done(RED._('zip.error.parse', { err: err }));
+        // });
+      }
     }
-    RED.nodes.registerType("id3", ZipNode);
-}
+
+    nrInputShim(this, onInput);
+  }
+  RED.nodes.registerType("id3", ZipNode);
+};

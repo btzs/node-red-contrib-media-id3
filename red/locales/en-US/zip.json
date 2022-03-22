@@ -16,7 +16,8 @@
         "mode": {
             "compress": "Compress",
             "decompress": "Decompress",
-            "extract": "Extract"
+            "extract": "Extract",
+            "update": "Update"
         },
         "error": {
             "payload-type-buffer": "Payload type must be a Buffer",
