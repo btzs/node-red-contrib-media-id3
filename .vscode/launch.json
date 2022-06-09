@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/red/node.js"
+            "program": "${workspaceFolder}/red/id3.js"
         }
     ]
 }

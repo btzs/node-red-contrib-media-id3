@@ -15,8 +15,6 @@
  * limitations under the License.
  **/
 
-const util = require("util");
-
 function nrInputShim(node, fn) {
   node.on("input", function (msg, send, done) {
     send = send || node.send;
