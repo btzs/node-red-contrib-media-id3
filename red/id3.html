@@ -28,7 +28,7 @@
 </script>
 
 <script type="text/x-red" data-help-name="id3">
-     <p>Reads and creates id3 files</p>
+     <p>Extracts and Updates ID3-tags</p>
 
      <h3>Inputs</h3>
      <p><i>Extract</i> mode</p>
@@ -84,9 +84,6 @@
     defaults: {
       name: { value: "" },
       mode: { value: "extract" },
-      filename: { value: "" },
-      compressionlevel: { value: 6 },
-      outasstring: { value: false },
     },
     inputs: 1,
     outputs: 1,
