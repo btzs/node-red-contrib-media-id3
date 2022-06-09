@@ -7,7 +7,7 @@
   },
   "node-red": {
     "nodes": {
-      "id3": "red/zip.js"
+      "id3": "red/id3.js"
     }
   },
   "repository": {
@@ -15,9 +15,10 @@
     "url": "git+https://github.com/btzs/node-red-contrib-media-id3.git"
   },
   "keywords": [
-    "zip",
+    "id3",
     "node-red",
-    "unzip"
+    "meta-data",
+    "mp3"
   ],
   "author": "Benjamin Tzschoppe <btzs@btzs.eu>",
   "license": "Apache-2.0",
