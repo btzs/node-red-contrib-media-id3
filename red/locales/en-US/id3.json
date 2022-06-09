@@ -2,11 +2,9 @@
     "id3": {
         "label": {
             "name": "Name",
-            "mode": "Mode",
+            "mode": "Mode"
         },
         "mode": {
-            "compress": "Compress",
-            "decompress": "Decompress",
             "extract": "Extract",
             "update": "Update"
         },

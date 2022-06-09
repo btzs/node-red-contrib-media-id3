@@ -15,66 +15,75 @@
 
 <script type="text/x-red" data-template-name="id3">
   <div class="form-row">
-  	<label for="node-input-mode"><i class="fa fa-sliders"></i> <span data-i18n="id3.label.mode"></span></label>
-  	<select type="text" id="node-input-mode">
-  		<option value="extract" data-i18n="id3.mode.extract"></option>
-  		<option value="update" data-i18n="id3.mode.update"></option>
-  	</select>
-  </div>
-     <div class="form-row">
-         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="id3.label.name"></span></label>
-         <input type="text" id="node-input-name" data-i18n="[placeholder]id3.label.name">
-     </div>
-</script>
-
-<script type="text/x-red" data-help-name="id3">
-     <p>Extracts and Updates ID3-tags</p>
-
-     <h3>Inputs</h3>
-     <p><i>Extract</i> mode</p>
-  <dl class="message-properties">
-  	<dt>payload<span class="property-type">Buffer</span></dt>
-  	<dd>
-             A Buffer containing the MP3 file we want to extract the ID3-tags from.
-  	</dd>
-     </dl>
-
-     <p><i>Update</i> mode</p>
-  <dl class="message-properties">
-  	<dt>payload<span class="property-type">Buffer</span></dt>
-  	<dd>
-             A Buffer containing the MP3 file we want to update the ID3-tags for.
-  	</dd>
-         <dt>tags<span class="property-type">Object</span></dt>
-  	<dd>
-             An object containing the id3 tags. Example: {"album":"Conclusion Stellaire","artist":"Several Definitions","genre":"Melodic House & Techno","title":"Carbone (Original Mix)","year":"2022","image":{"mime":"image/jpeg","type":{"id":3,"name":"front cover"},"description":"Cover","imageBuffer":[.....]}}}
-  	</dd>
-     </dl>
-
-     <h3>Outputs</h3>
-     <p><i>Extract</i> mode</p>
-  <dl class="message-properties">
-  	<dt>payload<span class="property-type">Object</span></dt>
-  	<dd>
-             JSON object containing the tags.
-  	</dd>
-     </dl>
-
-     <p><i>Update</i> mode</p>
-  <dl class="message-properties">
-  	<dt>payload<span class="property-type">Buffer</span></dt>
-  	<dd>
-        A Buffer containing the MP3 file with updated ID3-tags.
-         </dd>
-
-     </dl>
-
-
-     <h3>Details</h3>
-     <p>
-         Node extract or update the ID3 tags of a MP3 file comming in as a buffer. It is not supported to work with filenames. 
-        
-     </p>
+    <label for="node-input-mode"><i class="fa fa-sliders"></i> <span data-i18n="id3.label.mode"></span></label>
+    <select type="text" id="node-input-mode">
+        <option value="extract" data-i18n="id3.mode.extract"></option>
+        <option value="update" data-i18n="id3.mode.update"></option>
+    </select>
+    </div>
+    <div class="form-row">
+       <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="id3.label.name"></span></label>
+       <input type="text" id="node-input-name" data-i18n="[placeholder]id3.label.name">
+    </div>
+    </script>
+    
+    <script type="text/x-red" data-help-name="id3">
+    <p>Extracts and Updates ID3-tags</p>
+    
+    <h3>Inputs</h3>
+    <p><i>Extract</i> mode</p>
+    <dl class="message-properties">
+    <dt>payload<span class="property-type">Buffer</span></dt>
+    <dd>
+           A Buffer containing the MP3 file we want to extract the ID3-tags from.
+    </dd>
+    </dl>
+    
+    <p><i>Update</i> mode</p>
+    <dl class="message-properties">
+    <dt>payload<span class="property-type">Buffer</span></dt>
+    <dd>
+           A Buffer containing the MP3 file we want to update the ID3-tags for.
+    </dd>
+    <dt>tags<span class="property-type">Object</span></dt>
+    <dd>
+           An object containing the id3 tags. Example: <pre>
+               {
+        "album": "Conclusion Stellaire",
+        "artist": "Several Definitions",
+        "genre": "Melodic House & Techno",
+        "title": "Carbone (Original Mix)",
+        "year": "2022"
+    }
+           </pre>
+    
+    </dd>
+    </dl>
+    
+    <h3>Outputs</h3>
+    <p><i>Extract</i> mode</p>
+    <dl class="message-properties">
+    <dt>payload<span class="property-type">Object</span></dt>
+    <dd>
+           JSON object containing the tags.
+    </dd>
+    </dl>
+    
+    <p><i>Update</i> mode</p>
+    <dl class="message-properties">
+    <dt>payload<span class="property-type">Buffer</span></dt>
+    <dd>
+      A Buffer containing the MP3 file with updated ID3-tags.
+       </dd>
+    
+    </dl>
+    
+    
+    <h3>Details</h3>
+    <p>
+       Node extract or update the ID3 tags of a MP3 file comming in as a buffer. It is not supported to work with filenames.
+    
+    </p>
 </script>
 
 <script type="text/javascript">
