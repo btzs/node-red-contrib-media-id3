@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/btzs/node-red-contrib-media-id3#readme",
   "dependencies": {
-    "jszip": "^3.5.0",
     "node-id3": "^0.2.3"
   }
 }
