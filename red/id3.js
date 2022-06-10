@@ -56,7 +56,7 @@ module.exports = function (RED) {
 
         const tags = msg.tags
 
-        if (!(tags.constructor.name === "Object")) {
+        if (!(typeof tags === 'object' && !Array.isArray(tags) && tags !== null)) {
           done(RED._("id3.error.type-tags"));
           return;
         }
