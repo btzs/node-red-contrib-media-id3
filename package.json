@@ -8,7 +8,8 @@
   "node-red": {
     "nodes": {
       "id3": "red/id3.js"
-    }
+    },
+    "version": ">=2.0.0"
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,8 @@
   "homepage": "https://github.com/btzs/node-red-contrib-media-id3#readme",
   "dependencies": {
     "node-id3": "^0.2.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
