@@ -21,3 +21,8 @@ If **Mode** is **Update**, the function takes the MP3 file in the buffer from `m
 npm install node-red-contrib-media-id3
 ```
 or search for `node-red-contrib-media-id3` in Node RED's Settings -> Manage Palette -> Install.
+
+
+# To Do
+* Check if file in buffer really is a MP3 file.  
+* Add Mode `Delete` to allow deleting all tags.
