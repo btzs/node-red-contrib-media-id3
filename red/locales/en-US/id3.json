@@ -9,7 +9,7 @@
             "update": "Update"
         },
         "error": {
-            "payload-type-tags": "Tags must be object",
+            "type-tags": "Tags must be object",
             "payload-type-buffer": "Payload type must be a Buffer",
             "payload-type-buffer-string": "Payload type must be a Buffer or a String",
             "filename-type-string": "Filename type must be a String",

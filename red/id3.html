@@ -89,14 +89,14 @@
 <script type="text/javascript">
   RED.nodes.registerType("id3", {
     category: "function",
-    color: "#DEBD5C",
+    color: "#C0C0C0",
     defaults: {
       name: { value: "" },
       mode: { value: "extract" },
     },
     inputs: 1,
     outputs: 1,
-    icon: "id3.png",
+    icon: "font-awesome/fa-file-audio-o",
     label: function () {
       return this.name || this._("id3.mode." + this.mode).toLowerCase();
     },
