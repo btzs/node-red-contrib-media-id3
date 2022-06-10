@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-media-id3",
-  "version": "1.1.0",
-  "description": "Node-RED node to edit ID3.",
+  "version": "1.0.1",
+  "description": "Node-RED node to edit ID3 tags.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,7 +20,7 @@
     "meta-data",
     "mp3"
   ],
-  "author": "Benjamin Tzschoppe <btzs@btzs.eu>",
+  "author": "Benjamin Tzschoppe <node-red-contrib-media-id3@btzs.eu>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/btzs/node-red-contrib-media-id3/issues"
