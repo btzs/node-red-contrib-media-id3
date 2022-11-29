@@ -2,7 +2,7 @@
 
 Node-RED node to extract and update ID3 tags of MP3 files coming in *as Buffer*. Based on node-id3.
 
-Similar nodes only allow extracting/updating the ID3 tags of specified filenames, whereas this only allows updating MP3 files which come in as a Buffer.
+Similar nodes only allow extracting/updating the ID3 tags of specified files, whereas this only allows updating MP3 files which come in as a Buffer.
 
 If **Mode** is **Extract**, the function takes the MP3 file in the buffer from `msg.payload` and extracts the ID3 tags from it and places the result back into `msg.payload`.
 
